@@ -27,6 +27,8 @@ namespace AdventOfCode
             List<string> inputDay2 = File.ReadAllLines("resources\\2015\\inputDay2").ToList();
             string inputDay3 = File.ReadAllText("resources\\2015\\inputDay3");
             string inputDay4 = "yzbqklnj";
+            List<string> inputDay5 = File.ReadAllLines("resources\\2015\\inputDay5").ToList();
+            List<string> inputDay6 = File.ReadAllLines("resources\\2015\\inputDay6").ToList();
 
             Console.WriteLine($"Day 1 Part 1: {AdventOfCode2015.Day1Part1(inputDay1)}");
             Console.WriteLine($"Day 1 Part 2: {AdventOfCode2015.Day1Part2(inputDay1)}");
@@ -36,6 +38,10 @@ namespace AdventOfCode
             Console.WriteLine($"Day 3 Part 2: {AdventOfCode2015.Day3Part2(inputDay3)}");
             //Console.WriteLine($"Day 4 Part 1: {AdventOfCode2015.Day4(inputDay4, "00-00-0")}");   // Works, but slow, so disabled
             //Console.WriteLine($"Day 4 Part 2: {AdventOfCode2015.Day4(inputDay4, "00-00-00")}");  // Works, but slow, so disabled
+            Console.WriteLine($"Day 5 Part 1: {AdventOfCode2015.Day5Part1(inputDay5)}");
+            Console.WriteLine($"Day 5 Part 2: {AdventOfCode2015.Day5Part2(inputDay5)}");
+            Console.WriteLine($"Day 6 Part 1: {AdventOfCode2015.Day6Part1(inputDay6)}");
+            Console.WriteLine($"Day 6 Part 2: {AdventOfCode2015.Day6Part2(inputDay6)}");
         }
 
         private static void Solution2020()

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace AdventOfCode
 {
@@ -186,6 +187,102 @@ namespace AdventOfCode
             }
 
             throw new ArgumentException("No fitting number found");
+        }
+
+        public static int Day5Part1(List<string> input)
+        {
+            string regexpVowel = "[aeiou].*[aeiou].*[aeiou]";
+            string regexpDoubleCharacter = "(\\w)\\1";
+            string regexForbidden = "ab|cd|pq|xy";
+
+            return input.Where(s => Regex.IsMatch(s, regexpVowel)).Where(s => Regex.IsMatch(s, regexpDoubleCharacter)).Count(s => !Regex.IsMatch(s, regexForbidden));
+        }
+
+        public static int Day5Part2(List<string> input)
+        {
+            string regexpDoubleLetter = "(..).*\\1";
+            string regexpRepeatedLetter = "(.).\\1";
+
+            return input.Where(s => Regex.IsMatch(s, regexpDoubleLetter)).Count(s => Regex.IsMatch(s, regexpRepeatedLetter));
+        }
+
+        public static int Day6Part1(List<string> input)
+        {
+            string regex = "(turn on|toggle|turn off)(?:.)(\\d+),(\\d+)(?: through )(\\d+),(\\d+)";
+            bool[,] map = new bool[1000, 1000];
+            int lightCounter = 0;
+
+            foreach (string s in input)
+            {
+                Match match = Regex.Match(s, regex);
+
+                string command = match.Groups[1].Value;
+                (int x, int y) from = (int.Parse(match.Groups[2].Value), int.Parse(match.Groups[3].Value));
+                (int x, int y) to = (int.Parse(match.Groups[4].Value), int.Parse(match.Groups[5].Value));
+
+                for (int x = from.x; x <= to.x; x++)
+                for (int y = from.y; y <= to.y; y++)
+                    switch (command)
+                    {
+                        case "turn on":
+                            lightCounter += map[x, y] ? 0 : 1;
+                            map[x, y] = true;
+                            break;
+                        case "turn off":
+                            lightCounter -= map[x, y] ? 1 : 0;
+                            map[x, y] = false;
+                            break;
+                        case "toggle":
+                            map[x, y] = !map[x, y];
+                            lightCounter += map[x, y] ? 1 : -1;
+                            break;
+                        default:
+                            throw new ArgumentException("Command not implemented");
+                    }
+            }
+
+            return lightCounter;
+        }
+
+        public static int Day6Part2(List<string> input)
+        {
+            string regex = "(turn on|toggle|turn off)(?:.)(\\d+),(\\d+)(?: through )(\\d+),(\\d+)";
+            int[,] map = new int[1000, 1000];
+            int lightCounter = 0;
+
+            foreach (string s in input)
+            {
+                Match match = Regex.Match(s, regex);
+
+                string command = match.Groups[1].Value;
+                (int x, int y) from = (int.Parse(match.Groups[2].Value), int.Parse(match.Groups[3].Value));
+                (int x, int y) to = (int.Parse(match.Groups[4].Value), int.Parse(match.Groups[5].Value));
+
+                for (int x = from.x; x <= to.x; x++)
+                for (int y = from.y; y <= to.y; y++)
+                    switch (command)
+                    {
+                        case "turn on":
+                            map[x, y]++;
+                            lightCounter++;
+                            break;
+                        case "turn off":
+                            if (map[x, y] == 0)
+                                continue;
+
+                            map[x, y]--;
+                            lightCounter--;
+                            break;
+                        case "toggle":
+                            map[x, y] += 2;
+                            lightCounter += 2;
+                            break;
+                        default:
+                            throw new ArgumentException("Command not implemented");
+                    }
+            }
+
+            return lightCounter;
         }
 
         #endregion
