@@ -125,6 +125,125 @@ namespace AdventOfCode
             return result;
         }
 
+        public static int Day4Part1(List<string> input)
+        {
+            string regex = @"(\w+)(?::)(#\w+|\w+)";
+
+            int result = 0;
+
+            Dictionary<string, string> currentPassport = new Dictionary<string, string>();
+
+            List<string> obligatoryFields = new List<string>
+            {
+                "byr",
+                "iyr",
+                "eyr",
+                "hgt",
+                "hcl",
+                "ecl",
+                "pid"
+            };
+
+            foreach (string s in input)
+            {
+                if (string.IsNullOrEmpty(s))
+                {
+                    bool complete = obligatoryFields.All(obligatoryField => currentPassport.ContainsKey(obligatoryField));
+                    result += complete ? 1 : 0;
+                    currentPassport = new Dictionary<string, string>();
+                    continue;
+                }
+
+                MatchCollection matches = Regex.Matches(s, regex);
+
+                foreach (Match match in matches)
+                    currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+            }
+
+            bool lastComplete = obligatoryFields.All(obligatoryField => currentPassport.ContainsKey(obligatoryField));
+            result += lastComplete ? 1 : 0;
+
+            return result;
+        }
+
+        public static int Day4Part2(List<string> input)
+        {
+            string regex = @"(\w+)(?::)(#\w+|\w+)";
+
+            int result = 0;
+
+            Dictionary<string, string> currentPassport = new Dictionary<string, string>();
+
+            List<string> obligatoryFields = new List<string>
+            {
+                "byr",
+                "iyr",
+                "eyr",
+                "hgt",
+                "hcl",
+                "ecl",
+                "pid"
+            };
+
+            foreach (string s in input)
+            {
+                if (string.IsNullOrEmpty(s))
+                {
+                    bool complete = obligatoryFields.All(obligatoryField => currentPassport.ContainsKey(obligatoryField));
+                    result += complete ? 1 : 0;
+                    currentPassport = new Dictionary<string, string>();
+                    continue;
+                }
+
+                MatchCollection matches = Regex.Matches(s, regex);
+
+                foreach (Match match in matches)
+                    switch (match.Groups[1].Value)
+                    {
+                        case "byr":
+                            if (int.TryParse(match.Groups[2].Value, out int byr) && byr >= 1920 && byr <= 2002)
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                        case "iyr":
+                            if (int.TryParse(match.Groups[2].Value, out int iyr) && iyr >= 2010 && iyr <= 2020)
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                        case "eyr":
+                            if (int.TryParse(match.Groups[2].Value, out int eyr) && eyr >= 2020 && eyr <= 2030)
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                        case "hgt":
+                            if (match.Groups[2].Value.EndsWith("cm") && int.TryParse(match.Groups[2].Value.Replace("cm", ""), out int hgt) && hgt >= 150 && hgt <= 193 || match.Groups[2].Value.EndsWith("in") && int.TryParse(match.Groups[2].Value.Replace("in", ""), out int hgtin) && hgtin >= 59 && hgtin <= 76)
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                        case "hcl":
+                            if (Regex.IsMatch(match.Groups[2].Value, @"#([0-9a-f]){6}"))
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                        case "ecl":
+                            if (Regex.IsMatch(match.Groups[2].Value, @"(amb|blu|brn|gry|grn|hzl|oth)"))
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                        case "pid":
+                            if (Regex.IsMatch(match.Groups[2].Value, @"^\d{9}$"))
+                                currentPassport.Add(match.Groups[1].Value, match.Groups[2].Value);
+
+                            break;
+                    }
+            }
+
+            bool lastComplete = obligatoryFields.All(obligatoryField => currentPassport.ContainsKey(obligatoryField));
+            result += lastComplete ? 1 : 0;
+
+            return result;
+        }
+
         #endregion
 
         #endregion

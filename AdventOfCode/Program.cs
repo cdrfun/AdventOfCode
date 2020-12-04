@@ -60,6 +60,8 @@ namespace AdventOfCode
                 (2, 1)
             };
 
+            List<string> inputDay4 = File.ReadAllLines("resources\\2020\\inputDay4").ToList();
+
             Console.WriteLine("Advent Of Code 2020 Solutions");
             Console.WriteLine($"Day 1 Part 1: {AdventOfCode2020.Day1Part1(inputDay1)}");
             Console.WriteLine($"Day 1 Part 2: {AdventOfCode2020.Day1Part2(inputDay1)}");
@@ -67,6 +69,8 @@ namespace AdventOfCode
             Console.WriteLine($"Day 2 Part 2: {AdventOfCode2020.Day2Part2(inputDay2)}");
             Console.WriteLine($"Day 3 Part 1: {AdventOfCode2020.Day3(inputDay3, inputParameterDay3Part1)}");
             Console.WriteLine($"Day 3 Part 2: {AdventOfCode2020.Day3(inputDay3, inputParameterDay3Part2)}");
+            Console.WriteLine($"Day 4 Part 1: {AdventOfCode2020.Day4Part1(inputDay4)}");
+            Console.WriteLine($"Day 4 Part 2: {AdventOfCode2020.Day4Part2(inputDay4)}");
         }
 
         #endregion
