@@ -9,6 +9,28 @@ namespace AdventOfCode
     {
         #region methods
 
+        #region private methods
+
+        private static int Day5FindPosition(string input, int from, int to, char upper, char lower)
+        {
+            foreach (char c in input)
+            {
+                int newColumnBorder = (from + to) / 2;
+
+                if (c == upper)
+                    from = newColumnBorder + 1;
+                else if (c == lower)
+                    to = newColumnBorder;
+            }
+
+            if (from == to)
+                return from;
+
+            throw new ArgumentException("input doesn't fully qualify");
+        }
+
+        #endregion
+
         #region public methods
 
         public static double Day1Part1(List<int> puzzleInput)
@@ -242,6 +264,47 @@ namespace AdventOfCode
             result += lastComplete ? 1 : 0;
 
             return result;
+        }
+
+        public static int Day5Part1(List<string> input)
+        {
+            int currentMax = 0;
+
+            foreach (string s in input)
+            {
+                int row = Day5FindPosition(s.Substring(0, s.Length - 3), 0, 127, 'B', 'F');
+                int column = Day5FindPosition(s.Substring(s.Length - 3), 0, 7, 'R', 'L');
+                int seatId = row * 8 + column;
+
+                if (seatId > currentMax)
+                    currentMax = seatId;
+            }
+
+            return currentMax;
+        }
+
+        public static int Day5Part2(List<string> input)
+        {
+            List<int> seatList = new List<int>();
+
+            foreach (string s in input)
+            {
+                int row = Day5FindPosition(s.Substring(0, s.Length - 3), 0, 127, 'B', 'F');
+                int column = Day5FindPosition(s.Substring(s.Length - 3), 0, 7, 'R', 'L');
+                int seatId = row * 8 + column;
+
+                seatList.Add(seatId);
+            }
+
+            for (int i = seatList.Min(); i < seatList.Max(); i++)
+            {
+                if (seatList.Contains(i))
+                    continue;
+
+                return i;
+            }
+
+            throw new ArgumentException("No seat was missing");
         }
 
         #endregion

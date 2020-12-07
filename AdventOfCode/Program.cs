@@ -29,6 +29,7 @@ namespace AdventOfCode
             string inputDay4 = "yzbqklnj";
             List<string> inputDay5 = File.ReadAllLines("resources\\2015\\inputDay5").ToList();
             List<string> inputDay6 = File.ReadAllLines("resources\\2015\\inputDay6").ToList();
+            List<string> inputDay7 = File.ReadAllLines("resources\\2015\\inputDay7").ToList();
 
             Console.WriteLine($"Day 1 Part 1: {AdventOfCode2015.Day1Part1(inputDay1)}");
             Console.WriteLine($"Day 1 Part 2: {AdventOfCode2015.Day1Part2(inputDay1)}");
@@ -42,6 +43,7 @@ namespace AdventOfCode
             Console.WriteLine($"Day 5 Part 2: {AdventOfCode2015.Day5Part2(inputDay5)}");
             Console.WriteLine($"Day 6 Part 1: {AdventOfCode2015.Day6Part1(inputDay6)}");
             Console.WriteLine($"Day 6 Part 2: {AdventOfCode2015.Day6Part2(inputDay6)}");
+            //Console.WriteLine($"Day 7 Part 1: {AdventOfCode2015.Day7Part1(inputDay7)["a"]}");
         }
 
         private static void Solution2020()
@@ -61,6 +63,7 @@ namespace AdventOfCode
             };
 
             List<string> inputDay4 = File.ReadAllLines("resources\\2020\\inputDay4").ToList();
+            List<string> inputDay5 = File.ReadAllLines("resources\\2020\\inputDay5").ToList();
 
             Console.WriteLine("Advent Of Code 2020 Solutions");
             Console.WriteLine($"Day 1 Part 1: {AdventOfCode2020.Day1Part1(inputDay1)}");
@@ -71,6 +74,8 @@ namespace AdventOfCode
             Console.WriteLine($"Day 3 Part 2: {AdventOfCode2020.Day3(inputDay3, inputParameterDay3Part2)}");
             Console.WriteLine($"Day 4 Part 1: {AdventOfCode2020.Day4Part1(inputDay4)}");
             Console.WriteLine($"Day 4 Part 2: {AdventOfCode2020.Day4Part2(inputDay4)}");
+            Console.WriteLine($"Day 5 Part 1: {AdventOfCode2020.Day5Part1(inputDay5)}");
+            Console.WriteLine($"Day 5 Part 2: {AdventOfCode2020.Day5Part2(inputDay5)}");
         }
 
         #endregion

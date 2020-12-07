@@ -136,6 +136,7 @@ hcl:#cfa07d byr:1929";
             // Assert
             Assert.AreEqual(2, result1);
         }
+
         [TestMethod]
         public void Day4Part2Test()
         {
@@ -207,6 +208,19 @@ iyr:2010 hgt:158cm hcl:#b6652a ecl:blu byr:1944 eyr:2021 pid:093154719";
             Assert.AreEqual(4, resultValid, $"{nameof(resultValid)}");
             Assert.AreEqual(0, resultInvalid, $"{nameof(resultInvalid)}");
             Assert.AreEqual(4, resultComplete, $"{nameof(resultComplete)}");
+        }
+
+        [TestMethod]
+        public void Day5Part1Test()
+        {
+            // Arrange
+            List<string> input = new List<string> {"FBFBBFFRLR", "BFFFBBFRRR", "FFFBBBFRRR", "BBFFBBFRLL"};
+
+            // Act
+            int result = AdventOfCode2020.Day5Part1(input);
+
+            // Assert
+            Assert.AreEqual(820, result);
         }
 
         #endregion
